@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 
 import { trpc } from "../_trpc/client";
@@ -11,6 +12,7 @@ export default function TodoList({
 }) {
   const getTodos = trpc.getTodos.useQuery(undefined, {
     initialData: initialTodos,
+    // 애초에 이게 왜 true임?
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
@@ -54,7 +56,7 @@ export default function TodoList({
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="flex-grow text-black bg-white rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2"
+          className="flex-grow border text-black bg-white rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 py-2"
         />
         <button
           onClick={async () => {
